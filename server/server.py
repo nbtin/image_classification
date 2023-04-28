@@ -13,8 +13,10 @@ from PIL.Image import Resampling
 app = Flask(__name__)
 CORS(app)
 
-# load the model and perform inference
-model = load_model('../models/resnet.h5')
+# # load the model and perform inference
+# model = load_model('../models/resnet.h5')
+
+model = None
 
 def sort_results(predictions):
     # convert the predictions to a list of dictionaries
@@ -25,6 +27,8 @@ def sort_results(predictions):
 
 @app.route("/", methods=['GET'])
 def home_page():
+    global model
+    model = load_model('../models/resnet.h5')
     return render_template('index.html')
 
 # define a route for the API
