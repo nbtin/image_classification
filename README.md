@@ -1,6 +1,6 @@
 # Image Classification Web App
 
-This repository contains a simple web application that allows users to upload an image and classify it using a pre-trained ResNet50v2 model. The application is built using the Flask web framework and is designed to run locally on your machine.
+This repository contains a simple web application that allows users to upload an image and classify it using a pre-trained [ResNet50v2](https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet50V2) model. The application is built using the Flask web framework and is designed to run locally on your machine.
 
 ## Installation
 
