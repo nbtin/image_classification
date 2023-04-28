@@ -3,7 +3,6 @@ flask_cors==3.0.10
 keras==2.11.0
 numpy==1.24.2
 opencv_python==4.7.0.72
-Pillow==9.5.0
+Pillow
 tensorflow==2.12.0
-tensorflow_intel==2.11.0
 waitress==2.1.2

@@ -7,5 +7,5 @@ model = tf.keras.Sequential([tf.keras.layers.InputLayer(input_shape=(224, 224, 3
                                                                include_top=True,
                                                                weights='imagenet')])
 model.compile()
-model.save('models/resnet.h5')
+model.save('resnet.h5')
 model.summary()
