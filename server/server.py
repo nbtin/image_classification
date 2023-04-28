@@ -13,6 +13,9 @@ from PIL.Image import Resampling
 app = Flask(__name__)
 CORS(app)
 
+# load the model and perform inference
+model = load_model('../models/resnet.h5')
+
 def sort_results(predictions):
     # convert the predictions to a list of dictionaries
     top = [{'probability': float(p), 'className': IMAGENET_CLASSES[i]} for i, p in enumerate(predictions[0])]
@@ -39,9 +42,6 @@ def predict():
 
     # Add a batch dimension to the image
     image = np.expand_dims(image, axis=0)
-
-    # load the model and perform inference
-    model = load_model('../models/resnet.h5') # replace with your own model loading code
     
     # result = model.predict(np.expand_dims(image, axis=0))
     result = model.predict(image)
