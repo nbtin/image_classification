@@ -1,22 +1,3 @@
-
-# from flask import Flask, render_template, make_response
-
-# # Khởi tạo Flask
-# app = Flask(__name__)
-
-# # Hàm xử lý request
-# @app.route("/", methods=['GET'])
-# def home_page():
-#     response = make_response(render_template('index.html'))
-#     response.headers['Access-Control-Allow-Origin'] = '*'
-#     return response
-
-
-
-# if __name__ == '__main__':
-#     app.run(host='127.0.0.1', debug=False)
-
-
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from waitress import serve 
