@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Classification system</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      padding-top: 15px;
+    }
+    label {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    #image-preview {
+        max-width: 400px;
+        max-height: 400px;
+        margin-bottom: 10px;
+      }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+    #result {
+      align-items: center;
+      /* text-align: center; */
+      margin-top: 10px;
+      font-size: 20px;
+      white-space: pre-wrap;
+    }
+    p {
+      text-align: center;
+    }
+    a {
+      color:aqua;
+    }
+    a:visited{
+      color:aquamarine;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>IMAGE CLASSIFICATION SYSTEM</h1>
+      <p><b>Base model:</b> <a href="https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet_v2/ResNet50V2">ResNet50v2</a>, pre-trained on <a href="https://www.image-net.org/">ImageNet</a> dataset.</p>
+    </header>
+    <div class="container">
+      <button type="button" onclick="document.getElementById('image-upload').click()">1. Choose an image</button>
+      <input type="file" id="image-upload" accept="image/*" style="display:none;" onchange="showFileName(this)" >
+      <!-- <button><label for="image-upload">Choose an image</label></button>
+      <input type="file" id="image-upload" accept="image/*"> -->
+      <p id="image-upload-label"></p>
+      <img style="max-width:400px; border-radius:1rem"
+      src="https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png"
+      alt="User Image" id="image-preview">
+      <button onclick="uploadImage()">2. Upload and Classify</button>
+      <div id="result"></div>
+    </div>
+    <script>
+      function showFileName(input) {
+        var fileName = input.files[0].name;
+        var label = document.getElementById('image-upload-label');
+        label.innerHTML = fileName;
+      }
+      function uploadImage() {
+        var input = document.getElementById('image-upload');
+        var file = input.files[0];
+        var formData = new FormData();
+        formData.append('image', file);
+        
+        var imagePreview = document.getElementById('image-preview');
+        if (!imagePreview) {
+          imagePreview = document.createElement('img');
+          imagePreview.id = 'image-preview';
+          var imageContainer = document.getElementById('image-container');
+          imageContainer.appendChild(imagePreview);
+        }
+
+        var objectUrl = URL.createObjectURL(file);
+        imagePreview.src = objectUrl;
+
+        var resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = "Wait a second...";
+
+        fetch('/classify', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          var resultDiv = document.getElementById('result');
+          let className1 = data.top1.className;
+          let probability1 = data.top1.probability;
+          let className2 = data.top2.className;
+          let probability2 = data.top2.probability;
+          
+          output = `<p>I am <b>${(probability1 * 100).toFixed(2)}%</b> sure that this is a photo contains <b>${className1}</b>.</p>`;
+          if (probability1 - probability2 < 0.1){
+            output = output + `<p>However, I am also considering whether this is a photo containing <b>${className2}</b> with <b>${(probability2 * 100).toFixed(2)}%</b> of confidence.</p>`;
+          }
+          resultDiv.innerHTML = output;
+          // resultDiv.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';;
+
+
+        })
+        .catch(error => {
+          console.error(error);
+          var resultDiv = document.getElementById('result');
+          resultDiv.innerHTML = error;
+        });
+      }
+    </script>
+  </body>
+</html>
