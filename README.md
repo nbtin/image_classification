@@ -4,7 +4,9 @@ This repository contains a very simple web application that allows users to uplo
 
 ## Installation
 
-Before you can run the application, you'll need to install the necessary dependencies. You can do this by running the following command:
+Before you can run the application, you'll need to have [Python](https://www.python.org/) installed on your PC.
+
+Then, you have to install the necessary dependencies. You can do this by running the following command:
 
 ```
 pip install -r requirements.txt
