@@ -9,7 +9,8 @@ ngrok.exe
 *.so
 
 mobilenet.py
-resnet.py
+mobilenet.h5
+resnet.h5
 
 # Distribution / packaging
 .Python

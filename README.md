@@ -14,9 +14,16 @@ This will install Flask, TensorFlow, Keras, Pillow, and any other required packa
 
 ## Usage
 
+First of all, to generate `resnet.h5` pre-trained model, run the following command:
+```
+cd models/
+python resnet.py
+```
+
 To start the application, run the following command:
 
 ```
+cd ../server/
 python server.py
 ```
 

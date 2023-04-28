@@ -41,7 +41,7 @@ def predict():
     image = np.expand_dims(image, axis=0)
 
     # load the model and perform inference
-    model = load_model('./models/resnet.h5') # replace with your own model loading code
+    model = load_model('../models/resnet.h5') # replace with your own model loading code
     
     # result = model.predict(np.expand_dims(image, axis=0))
     result = model.predict(image)
