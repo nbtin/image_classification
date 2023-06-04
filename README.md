@@ -49,4 +49,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Thanks for going through this Repository! Have a nice day.**
 
-Got any queries? Feel free to contact us via <a href = "mailto: baotin2402@gmail.com">E-mail</a>.
+Got any queries? Feel free to contact me via <a href = "mailto: baotin2402@gmail.com">E-mail</a>.
